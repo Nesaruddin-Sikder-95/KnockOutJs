@@ -32,6 +32,7 @@
     Account ID:
     <select id="dropDownList" data-bind="options:Accounts, optionsText:'Name',optionsValue:'Id'"></select>
     Total Number of Accounts: <b><span data-bind="text:Accounts().length"></span></b>
+    Total Balance in all Account: <span data-bind="text:totalBalance()"></span>
     <hr />
     <h2>Selected Account Details</h2>
     Id:<span data-bind="text:Accounts()[selectedAccountIndex()].Id"></span><br />
@@ -62,15 +63,23 @@
 
         // This is View Model
         function AccountViewModel(acc) {
-            this.Id = acc.Id;
-            this.Name = acc.Name;
-            this.Balance = ko.observable(acc.Balance);
-            var a1 = new Account(1, "A1", 10000);
-            var a2 = new Account(2, "A2", 20000);
-            var a3 = new Account(3, "A3", 30000);
-            var a4 = new Account(4, "A4", 4000);
-            this.Accounts = ko.observableArray([a1, a2, a3, a4]);
-            this.selectedAccountIndex = ko.observable(0);
+            //this.Id = acc.Id
+            //this.Name = acc.Name
+            //this.Balance = ko.observable(acc.Balance)
+            var a1 = new Account(1, "A1", 10000)
+            var a2 = new Account(2, "A2", 20000)
+            var a3 = new Account(3, "A3", 30000)
+            var a4 = new Account(4, "A4", 4000)
+            this.Accounts = ko.observableArray([a1, a2, a3, a4])
+            this.selectedAccountIndex = ko.observable(0)
+
+            this.totalBalance = ko.computed(function () {
+                var total = 0;
+                for (var i = 0; i < this.Accounts().length; i++) {
+                    total += Number(this.Accounts()[i].Balance);
+                }
+                return total;
+            }, this)
         }
 
         var acc = new Account(1, "A5", 5000);

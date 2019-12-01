@@ -69,6 +69,7 @@
   <ItemGroup>
     <Content Include="jquery-2.2.3.js" />
     <Content Include="knockout-3.5.1.js" />
+    <Content Include="ComparedOvserbableArray.html" />
     <Content Include="OvserbableArray.html" />
     <Content Include="Web.config" />
   </ItemGroup>
